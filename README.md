@@ -6,6 +6,8 @@
 
 ![作品集预览](preview.png)
 
+> **已上线：** <https://claireclearj.github.io/portfolio/> · GitHub Pages（`main` 分支自动发布）
+
 ---
 
 ## 视觉与结构
@@ -37,7 +39,7 @@ personalweb/
 ├── assets/
 │   ├── fonts/                  # 自托管字体（woff2）
 │   └── favicon.svg             # 盾徽图标
-├── .github/workflows/deploy.yml # GitHub Actions 自动部署（可选）
+├── .github/workflows/deploy.yml # 可选的 Actions 工作流（当前线上未启用）
 ├── preview.png                 # 预览图
 └── README.md
 ```
@@ -132,7 +134,7 @@ npx serve .
 - 邮箱、坐标、社交链接：文件底部的 `contact`。
 - 首页 CTA、导航文案：`ui.heroActions`、`ui.nav`。
 
-> 现在 `data.js` 里的邮箱、公司、学校仍是占位内容（`claire.jiang@example.com`、`[ Your company ]`、`[ Your university ]`），上线前记得替换。
+> 现在 `data.js` 里的邮箱、公司、学校仍是示例内容（`claire.jiang@example.com`、`[ Your company ]`、`[ Your university ]`）。要换成你的真实资料，直接在 GitHub 网页编辑 `js/data.js` 即可。
 
 ### 5. 改默认语言
 
@@ -162,34 +164,29 @@ var lang = 'en';   // 改成 'zh' 则默认中文
 
 ## 部署到 GitHub Pages
 
-项目已经是纯静态站点，下面两种方式**二选一**即可，不要混用。
+**已上线：** <https://claireclearj.github.io/portfolio/>
+**仓库：** <https://github.com/ClaireclearJ/portfolio>
 
-### 方式 A：GitHub Actions（推荐，仓库已带工作流）
-
-1. 登录 GitHub → 右上角 **＋ → New repository**，仓库名建议 `portfolio`（或其他名字），**Public**，不要勾选 README，创建。
-2. 进入空仓库 → **Add file → Upload files**，把本目录里的 **`index.html`、`css/`、`js/`、`assets/`、`.github/`、`preview.png`、`README.md`** 拖进去，Commit。
-3. **Settings → Pages → Source** 选 **GitHub Actions**。
-4. 之后每次 commit 都会自动构建并发布。等 1～2 分钟，**Settings → Pages** 顶部会显示网址：
-   - 仓库名是 `portfolio` → `https://你的用户名.github.io/portfolio/`
-   - 仓库名是 `你的用户名.github.io` → `https://你的用户名.github.io/`
-
-### 方式 B：branch 部署（不想用 Actions 时）
-
-1. 同上创建仓库并上传文件，但**不要上传 `.github/` 目录**（避免工作流找不到 Pages 配置而报错）。
-2. **Settings → Pages → Source** 选 **Deploy from a branch** → Branch 选 **`main`**、目录 **`/ (root)`** → Save。
-3. 等 1～2 分钟，网址同上。
-
-> 如果已经按方式 A 把 Source 设成了 GitHub Actions，就不要再切到 branch；反之亦然。
+当前采用 **branch 部署**：`main` 分支 + `/ (root)`。每次 commit 后 GitHub Pages 会自动重建，通常 1 分钟左右。
 
 ### 以后怎么更新（不用装 Git）
 
-部署完成后，直接在 GitHub 网页里：
-
 1. 打开仓库 → `js/data.js` → 右上角铅笔图标 **Edit**。
 2. 加一个项目块 → **Commit changes**。
-3. 等 1 分钟，刷新网站即可看到新内容。
+3. 等 1 分钟，刷新 <https://claireclearj.github.io/portfolio/> 即可看到新内容。
 
 这就是这个站「随时方便加新内容」的核心：**只改一个文件，不碰 HTML/CSS。**
+
+### 如果要从零复刻
+
+1. 新建 **Public** 仓库（例如 `portfolio`），不要勾选 README。
+2. 上传 `index.html`、`css/`、`js/`、`assets/`、`preview.png`、`README.md`、`.nojekyll`。**不要上传 `.github/`**（当前用的是 branch 部署）。
+3. **Settings → Pages** → Source 选 **Deploy from a branch** → `main` / `/ (root)` → Save。
+4. 网址：`https://你的用户名.github.io/portfolio/`。
+
+### 可选：改用 GitHub Actions
+
+本目录另外附了 `.github/workflows/deploy.yml`，当前线上没有使用它。如果想改成 Actions：把 `.github/` 一并上传，并在 **Settings → Pages** 把 Source 改成 **GitHub Actions**；两种方式不要混用。
 
 ---
 
